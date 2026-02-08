@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "discovery-agent"
+version = "0.1.0"
+description = "Specialized discovery agent for STRIDE threat modeling and MITRE ATT&CK TTP output"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "openai>=1.50.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.11.0",
+]
+
+[project.scripts]
+discovery-agent = "discovery_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]
+pretty = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = ["openai"]
+ignore_missing_imports = true
